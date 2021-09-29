@@ -1,13 +1,12 @@
 import React from "react";
-import {buildFetch} from "../src/Network";
 import {useTranslations} from "../src/Translations";
 
-export async function getStaticProps({locale}) {
-    const time: any = await
+export async function getStaticProps({}) {
+    const time: any = await fetch("http://worldtimeapi.org/api/timezone/Europe/Warsaw", {
+        headers: {"Content-Type": "application/json"},
+        method: "GET",
+    }).then(res => res.json())
 
-
-        ("http://worldtimeapi.org/api/timezone/Europe/Warsaw")
-        .then(res => res.json())
     return {
         props: {time: time.datetime},
         revalidate: 5 * 60
